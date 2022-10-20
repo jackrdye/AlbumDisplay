@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    padding: 0.5em;
+}
+/* Top Bar */
+#top-panel {
+    /* background-color: blue; */
+    padding: 0em;
+}
+
+#title {
+    margin: auto;
+    text-align: center;
+    padding: 0px;
+    background-color: red;
+}
+
+#user-login {
+    margin-left: auto;
+    align-items:flex-end;
+    background: green;
+    padding: 1em;
+    flex-wrap: wrap;
+}
+.input-group {
+    /* display: flex; */
+    background-color: purple;
+}
+
+#username {
+    margin-right: 1em;
+}
+
+/* Bottom Section */
+
+#main-display {
+    display: flex;
+    border: solid;
+    padding: 0;
+    height: 85vh;
+}
+
+#left-panel {
+    border-right: solid;
+    width: 20%;
+    min-width: 140px;
+}
+
