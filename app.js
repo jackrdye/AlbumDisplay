@@ -44,6 +44,26 @@ app.post("/", (req, res) => {
     res.send(`Welcome ${name}`)
 })
 
+const findAllFriendsId = (UserList, friends) => { //list of friends usernames
+    const friendsInfo = []
+    let promiseArr = friends.map((friend) => {
+        // Only return the "_id" and "username" of the friend
+        return UserList.findOne({"username": friend}, {projection: {"_id": 1, "username": 1}})
+        .then(docs => {
+            // If friend exists in database then add their id, username to the friends list
+            if (docs !== null) {
+                friendsInfo.push(docs)
+            }
+        })
+    })
+    return Promise.all(promiseArr).then(() => {
+        console.log("promise all return: ")
+        console.log(friendsInfo)
+        return friendsInfo
+    })
+}
+
+
 app.get("/load",  (req, res) => {
     // const userId = req.cookies.user_id
     const userId = "63518b01193858d272ad54f7"
@@ -113,28 +133,7 @@ app.post("/login", (req, res) => {
     })
 })
 
-const findAllFriendsId = (UserList, friends) => { //list of friends usernames
-    const friendsInfo = []
-    let promiseArr = friends.map((friend) => {
-        // Only return the "_id" and "username" of the friend
-        return UserList.findOne({"username": friend}, {projection: {"_id": 1, "username": 1}})
-        .then(docs => {
-            // If friend exists in database then add their id, username to the friends list
-            if (docs !== null) {
-                friendsInfo.push(docs)
-            }
-        })
-    })
-    return Promise.all(promiseArr).then(() => {
-        console.log("promise all return: ")
-        console.log(friendsInfo)
-        return friendsInfo
-    })
-    // .then((friendsInfo) => {
-    //     console.log("yip")
-    //     return friendsInfo
-    // })
-}
+
 
 // db.get("mediaList").insert({'url': 'http://localhost:8081/media/1.jpg', 'userid': "63519150193858d272ad54f8", 'likedby':['Kevin','Tom']})
 
