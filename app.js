@@ -128,10 +128,16 @@ app.get("/getalbum", (req, res) => {
 app.post("/postlike", (req, res) => {
     const db = req.db
     const MediaList = db.get("mediaList")
-    const userId = req.cookies.user_id
-    userId = 
+    const UserList = db.get("userList")
+    const username = UserList.findOne({userid: req.cookies.user_id}, {projection: {username: 1}})
     const mediaId = req.body.photovideoid
-
+    
+    // update medialist post likes
+    MediaList.findOneAndUpdate({_id: mediaId}, {$addToSet: { likedby: username}})
+    .then((updatedDoc) => {
+        res.set("Content-Type", "application/json")
+        res.json(updatedDoc)
+    })
 })
 
 
