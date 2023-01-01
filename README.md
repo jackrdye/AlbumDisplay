@@ -1,4 +1,4 @@
-# AlbumAppHKU
+# AlbumDisplay
 
 To start the app, first run 'npm install'
 
